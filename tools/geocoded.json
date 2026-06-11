@@ -1,0 +1,408 @@
+[
+  {
+    "name": "Perets Dessert & Coffee Bar",
+    "category": "Coffee",
+    "lat": 35.466758,
+    "lng": -97.524498,
+    "osm": "Perets Dessert & Coffee Bar, 701, West Sheridan Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73102, United States"
+  },
+  {
+    "name": "Clarity Coffee",
+    "category": "Coffee",
+    "lat": 35.481866,
+    "lng": -97.521265,
+    "osm": "Clarity Coffee, North Walker Avenue, Midtown Oklahoma City, Oklahoma City, Oklahoma County, Oklahoma, 73103, United States"
+  },
+  {
+    "name": "Hall's Pizza Kitchen",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Harvey Bakery & Kitchen",
+    "category": "Food",
+    "lat": 35.482667,
+    "lng": -97.517863,
+    "osm": "Harvey Bakery & Kitchen, 301, Northwest 13th Street, Midtown Oklahoma City, Oklahoma City, Oklahoma County, Oklahoma, 73103, United States"
+  },
+  {
+    "name": "Bar Arbolada",
+    "category": "Food",
+    "lat": 35.468002,
+    "lng": -97.524077,
+    "osm": "Bar Arbolada, 637, West Main Street, Oklahoma City, Oklahoma County, Oklahoma, 73103, United States"
+  },
+  {
+    "name": "Bourbon St Cafe",
+    "category": "Food",
+    "lat": 35.465104,
+    "lng": -97.510448,
+    "osm": "Bourbon Street Cafe, Oklahoma Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73104, United States"
+  },
+  {
+    "name": "Bar Cicchetti",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Kitchen No 324",
+    "category": "Food",
+    "lat": 35.477808,
+    "lng": -97.562108,
+    "osm": "Kitchen and Bath Gallery, Oklahoma City, Oklahoma County, Oklahoma, United States"
+  },
+  {
+    "name": "Maht",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Birdies",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "The Red Cup",
+    "category": "Food",
+    "lat": 35.501519,
+    "lng": -97.533549,
+    "osm": "The Red Cup, 3122, North Classen Boulevard, Oklahoma City, Oklahoma County, Oklahoma, 73118, United States"
+  },
+  {
+    "name": "The Bradford House",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Cafe Kacao",
+    "category": "Food",
+    "lat": 35.503942,
+    "lng": -97.534875,
+    "osm": "Cafe Kacao, North Classen Boulevard, Asian District, Oklahoma City, Oklahoma County, Oklahoma, 73118, United States"
+  },
+  {
+    "name": "Cafe Antigua",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Ma Der Lao Kitchen",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "R&J Lounge and Supper Club",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "The Study",
+    "category": "Bar/Club",
+    "lat": 35.466634,
+    "lng": -97.524354,
+    "osm": "The Study, 701, West Sheridan Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73102, United States"
+  },
+  {
+    "name": "OK Cider",
+    "category": "Bar/Club",
+    "lat": 35.466955,
+    "lng": -97.524723,
+    "osm": "OK Cider Co., 705, West Sheridan Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73102, United States"
+  },
+  {
+    "name": "Duckie's Woodfire",
+    "category": "Bar/Club",
+    "lat": 35.470535,
+    "lng": -97.532093,
+    "osm": "Duckie's Woodfire, 310, North Klein Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73106, United States"
+  },
+  {
+    "name": "Social Capital",
+    "category": "Bar/Club",
+    "lat": 35.460465,
+    "lng": -97.519805,
+    "osm": "Social Capital, 517, South Hudson Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73109, United States"
+  },
+  {
+    "name": "Lamp Post Lounge",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Lunar Lounge",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Michael Murphy's Dueling Piano Bar",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Commonplace Books",
+    "category": "Shopping",
+    "lat": 35.481932,
+    "lng": -97.521279,
+    "osm": "Commonplace Books, 1325, North Walker Avenue, Midtown Oklahoma City, Oklahoma City, Oklahoma County, Oklahoma, 73103, United States"
+  },
+  {
+    "name": "Dead People's Stuff",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Orange Peel Vintage",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Room 3 Vintage Mall",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "The Jones Assembly",
+    "category": "Entertainment",
+    "lat": 35.466818,
+    "lng": -97.527451,
+    "osm": "The Jones Assembly, 901, West Sheridan Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73106, United States"
+  },
+  {
+    "name": "Beer City Music Hall",
+    "category": "Entertainment",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Trader Joe's",
+    "category": "Grocery",
+    "lat": 35.537825,
+    "lng": -97.531091,
+    "osm": "Trader Joe's, 6409, Avondale Drive, Nichols Hills, Oklahoma County, Oklahoma, 73116, United States"
+  },
+  {
+    "name": "Prelude Coffee Roasters",
+    "category": "Coffee",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Prairie OKC",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Eote Coffee",
+    "category": "Coffee",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Parlor OKC",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Plenty Mercantile",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Coffee Slingers Roasters",
+    "category": "Coffee",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "The Collective Kitchens",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "McNellie's Public House OKC",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Cookie's on Western",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Egg and CaPhe",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Ser OKC",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Guyutes",
+    "category": "Food",
+    "lat": 35.492976,
+    "lng": -97.525577,
+    "osm": "Guyutes, Northwest 23rd Street, Oklahoma City, Oklahoma County, Oklahoma, 73106, United States"
+  },
+  {
+    "name": "Bungalow 23",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Eleven Eleven OKC",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Bunker Club",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Pizzeria Gusto",
+    "category": "Food",
+    "lat": 35.493983,
+    "lng": -97.521331,
+    "osm": "Pizzeria Gusto, 2415, North Walker Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73103, United States"
+  },
+  {
+    "name": "The Wedge Pizzeria",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Yours Truly OKC",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Guestroom Records",
+    "category": "Shopping",
+    "lat": 35.508025,
+    "lng": -97.530075,
+    "osm": "Guestroom Records, 3701, North Western Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73118, United States"
+  },
+  {
+    "name": "Sushi Neko",
+    "category": "Food",
+    "lat": 35.515201,
+    "lng": -97.52969,
+    "osm": "Sushi Neko, 4318, North Western Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73118, United States"
+  },
+  {
+    "name": "Tous les Jours OKC",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "New State Burger",
+    "category": "Food",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Dig It Boutique",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Bad Granny's Bazaar",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Bar Sen",
+    "category": "Bar/Club",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "OKC Farmers Public Market",
+    "category": "Shopping",
+    "lat": null,
+    "lng": null,
+    "osm": null
+  },
+  {
+    "name": "Scissortail Park",
+    "category": "Entertainment",
+    "lat": 35.460221,
+    "lng": -97.517768,
+    "osm": "Scissortail Park, 300, Oklahoma City, Oklahoma County, Oklahoma, United States"
+  },
+  {
+    "name": "Zorba's Mediterranean",
+    "category": "Food",
+    "lat": 35.532432,
+    "lng": -97.565119,
+    "osm": "Zorba's Mediterranean Cuisine, 6014, North May Avenue, Oklahoma City, Oklahoma County, Oklahoma, 73112, United States"
+  }
+]

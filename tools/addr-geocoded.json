@@ -1,0 +1,350 @@
+[
+  {
+    "name": "Perets Dessert & Coffee Bar",
+    "address": "701 W Sheridan Ave, Oklahoma City, OK 73102",
+    "addrLat": 35.466699,
+    "addrLng": -97.524442
+  },
+  {
+    "name": "Clarity Coffee",
+    "address": "431 W Main St, Ste A, Oklahoma City, OK 73102",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Hall's Pizza Kitchen",
+    "address": "1004 N Hudson Ave, Ste 106, Oklahoma City, OK 73102",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Harvey's Bakery (Harvey Bakery & Kitchen)",
+    "address": "301 NW 13th St, Ste 100, Oklahoma City, OK 73103",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Bar Arbolada",
+    "address": "637 W Main St, Oklahoma City, OK 73102",
+    "addrLat": 35.468002,
+    "addrLng": -97.524077
+  },
+  {
+    "name": "Bourbon St. Café",
+    "address": "100 E California Ave, Oklahoma City, OK 73104",
+    "addrLat": 35.465339,
+    "addrLng": -97.510528
+  },
+  {
+    "name": "Bar Cicchetti",
+    "address": "121 NE 2nd St, Oklahoma City, OK 73104",
+    "addrLat": 35.469813,
+    "addrLng": -97.509763
+  },
+  {
+    "name": "Kitchen No. 324",
+    "address": "324 N Robinson Ave, Oklahoma City, OK 73102",
+    "addrLat": 35.47073,
+    "addrLng": -97.516223
+  },
+  {
+    "name": "Maht",
+    "address": "519 NW 23rd St Ste 111, Oklahoma City, OK 73103",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Birdies",
+    "address": "2201 NW 150th St Ste 200, Edmond, OK 73013",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "The Red Cup",
+    "address": "3122 N Classen Blvd, Oklahoma City, OK 73118",
+    "addrLat": 35.501519,
+    "addrLng": -97.533549
+  },
+  {
+    "name": "The Bradford House",
+    "address": "1235 NW 38th St, Oklahoma City, OK 73118",
+    "addrLat": 35.510023,
+    "addrLng": -97.532631
+  },
+  {
+    "name": "Café Kacao",
+    "address": "3325 N Classen Blvd, Oklahoma City, OK 73118",
+    "addrLat": 35.503301,
+    "addrLng": -97.534135
+  },
+  {
+    "name": "Café Antigua",
+    "address": "1903 N Classen Blvd, Oklahoma City, OK 73106",
+    "addrLat": 35.488228,
+    "addrLng": -97.531055
+  },
+  {
+    "name": "Ma Der Lao Kitchen",
+    "address": "1634 N Blackwelder Ave #102, Oklahoma City, OK 73106",
+    "addrLat": 35.485781,
+    "addrLng": -97.538485
+  },
+  {
+    "name": "R&J's Lounge and Supper Club",
+    "address": "320 NW 10th St, Oklahoma City, OK 73103",
+    "addrLat": 35.478167,
+    "addrLng": -97.518021
+  },
+  {
+    "name": "The Study",
+    "address": "701 W Sheridan Ave Suite 100, Oklahoma City, OK 73102",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "OK Cider",
+    "address": "705 W Sheridan Ave, Oklahoma City, OK 73102",
+    "addrLat": 35.466955,
+    "addrLng": -97.524723
+  },
+  {
+    "name": "Duckie's Woodfire",
+    "address": "310 N Klein Ave, Oklahoma City, OK 73106",
+    "addrLat": 35.470535,
+    "addrLng": -97.532093
+  },
+  {
+    "name": "Social Capital",
+    "address": "517 S Hudson Ave, Oklahoma City, OK 73109",
+    "addrLat": 35.460465,
+    "addrLng": -97.519805
+  },
+  {
+    "name": "Lamp Post Lounge",
+    "address": "222 E Sheridan Ave Suite 1, Oklahoma City, OK 73104",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Lunar Lounge",
+    "address": "1114 Classen Dr, Oklahoma City, OK 73103",
+    "addrLat": 35.479076,
+    "addrLng": -97.521454
+  },
+  {
+    "name": "Michael Murphy's Dueling Piano Bar",
+    "address": "119 E California Ave, Oklahoma City, OK 73104",
+    "addrLat": 35.465501,
+    "addrLng": -97.510298
+  },
+  {
+    "name": "Common Place Bookstore (Commonplace Books)",
+    "address": "1325 N Walker Ave Ste 138, Oklahoma City, OK 73103",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Dead People's Stuff",
+    "address": "1900 Linwood Blvd, Oklahoma City, OK 73106",
+    "addrLat": 35.474662,
+    "addrLng": -97.5443
+  },
+  {
+    "name": "Orange Peel Vintage",
+    "address": "904 W Britton Rd, Oklahoma City, OK 73114",
+    "addrLat": 35.565463,
+    "addrLng": -97.529056
+  },
+  {
+    "name": "Room 3 Vintage Mall",
+    "address": "2632 W Britton Rd, Oklahoma City, OK 73120",
+    "addrLat": 35.565566,
+    "addrLng": -97.513884
+  },
+  {
+    "name": "The Jones Assembly",
+    "address": "901 W Sheridan Ave, Oklahoma City, OK 73106",
+    "addrLat": 35.466818,
+    "addrLng": -97.527451
+  },
+  {
+    "name": "Beer City Music Hall",
+    "address": "1141 NW 2nd St, Oklahoma City, OK 73106",
+    "addrLat": 35.470035,
+    "addrLng": -97.531029
+  },
+  {
+    "name": "Trader Joe's",
+    "address": "6409 Avondale Dr, Nichols Hills, OK 73116",
+    "addrLat": 35.537825,
+    "addrLng": -97.531091
+  },
+  {
+    "name": "Prelude Coffee Roasters",
+    "address": "3 NE 8th St, Suite 210, Oklahoma City, OK 73104",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Prairie OKC",
+    "address": "3 NE 8th St, Oklahoma City, OK 73104",
+    "addrLat": 35.476278,
+    "addrLng": -97.511748
+  },
+  {
+    "name": "Eote Coffee",
+    "address": "7 NE 6th St, Suite 010, Oklahoma City, OK 73104",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Parlor OKC",
+    "address": "11 NE 6th St, Oklahoma City, OK 73104",
+    "addrLat": 35.474114,
+    "addrLng": -97.511573
+  },
+  {
+    "name": "Plenty Mercantile",
+    "address": "807 N Broadway Ave, Oklahoma City, OK 73102",
+    "addrLat": 35.475201,
+    "addrLng": -97.514292
+  },
+  {
+    "name": "Coffee Slingers Roasters",
+    "address": "1015 N Broadway Ave, Oklahoma City, OK 73102",
+    "addrLat": 35.477622,
+    "addrLng": -97.514365
+  },
+  {
+    "name": "The Collective Kitchens + Cocktails",
+    "address": "308 NW 10th St, Oklahoma City, OK 73103",
+    "addrLat": 35.478164,
+    "addrLng": -97.517864
+  },
+  {
+    "name": "McNellie's OKC",
+    "address": "1100 Classen Dr, Oklahoma City, OK 73103",
+    "addrLat": 35.479281,
+    "addrLng": -97.521322
+  },
+  {
+    "name": "Cookie's on Western (Karaoke Bar)",
+    "address": "2304 N Western Ave, Oklahoma City, OK 73106",
+    "addrLat": 35.492411,
+    "addrLng": -97.529842
+  },
+  {
+    "name": "Egg and CaPhe",
+    "address": "727 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.493478,
+    "addrLng": -97.525305
+  },
+  {
+    "name": "Ser",
+    "address": "726 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.493173,
+    "addrLng": -97.525164
+  },
+  {
+    "name": "Guyutes",
+    "address": "730 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.492976,
+    "addrLng": -97.525578
+  },
+  {
+    "name": "Bungalow 23",
+    "address": "731 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.493338,
+    "addrLng": -97.52528
+  },
+  {
+    "name": "Eleven Eleven",
+    "address": "601 NW 23rd St Ste B001, Oklahoma City, OK 73103",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Bunker Club",
+    "address": "433 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.493315,
+    "addrLng": -97.519641
+  },
+  {
+    "name": "Pizzeria Gusto",
+    "address": "2415 N Walker Ave, Oklahoma City, OK 73103",
+    "addrLat": 35.493473,
+    "addrLng": -97.521147
+  },
+  {
+    "name": "The Wedge Pizzeria",
+    "address": "230 NE 1st St, Oklahoma City, OK 73104",
+    "addrLat": 35.468414,
+    "addrLng": -97.507801
+  },
+  {
+    "name": "Yours Truly",
+    "address": "313 NW 23rd St, Oklahoma City, OK 73103",
+    "addrLat": 35.493306,
+    "addrLng": -97.517639
+  },
+  {
+    "name": "Guestroom Records",
+    "address": "3701 N Western Ave, Oklahoma City, OK 73118",
+    "addrLat": 35.508025,
+    "addrLng": -97.530075
+  },
+  {
+    "name": "Sushi Neko",
+    "address": "4318 N Western Ave, Oklahoma City, OK 73118",
+    "addrLat": 35.515201,
+    "addrLng": -97.52969
+  },
+  {
+    "name": "Tous les Jours OKC",
+    "address": "1841 Belle Isle Blvd Ste J, Oklahoma City, OK 73118",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "New State Burger",
+    "address": "1705 NW 16th St Ste A, Oklahoma City, OK 73106",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "Dig It Boutique",
+    "address": "1739 NW 16th St, Oklahoma City, OK 73106",
+    "addrLat": 35.486082,
+    "addrLng": -97.54001
+  },
+  {
+    "name": "Bad Granny's Bazaar",
+    "address": "1759 NW 16th St, Oklahoma City, OK 73106",
+    "addrLat": 35.486081,
+    "addrLng": -97.540312
+  },
+  {
+    "name": "Bar Sen",
+    "address": "1630 N Blackwelder Ave Ste 1, Oklahoma City, OK 73106",
+    "addrLat": null,
+    "addrLng": null
+  },
+  {
+    "name": "OKC Farmers Public Market",
+    "address": "311 S Klein Ave, Oklahoma City, OK 73108",
+    "addrLat": 35.463148,
+    "addrLng": -97.53283
+  },
+  {
+    "name": "Scissor Tail Park Farmers Market",
+    "address": "300 SW 7th St, Oklahoma City, OK 73109",
+    "addrLat": 35.457878,
+    "addrLng": -97.518625
+  },
+  {
+    "name": "Zorba's Mediterranean",
+    "address": "6014 N May Ave, Oklahoma City, OK 73112",
+    "addrLat": 35.531378,
+    "addrLng": -97.565568
+  }
+]
