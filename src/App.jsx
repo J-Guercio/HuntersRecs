@@ -38,7 +38,17 @@ export default function App() {
   const [startId, setStartId] = useState('__optimal__');
   const [mode, setMode] = useState('drive');
   const [focusTarget, setFocusTarget] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('okc-hunters-recs:theme') || 'light');
   const fileRef = useRef(null);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('okc-hunters-recs:theme', theme);
+    } catch {
+      /* ignore */
+    }
+  }, [theme]);
 
   useEffect(() => {
     try {
@@ -135,8 +145,17 @@ export default function App() {
     <div className="app">
       <aside className="sidebar">
         <div className="brand">
-          <h1>📍 OKC Hunters Recs</h1>
-          <p>{PLACES.length} spots from Hunter · track them, group them, route them.</p>
+          <div>
+            <h1>📍 OKC Hunters Recs</h1>
+            <p>{PLACES.length} spots from Hunter · track them, group them, route them.</p>
+          </div>
+          <button
+            className="theme-toggle"
+            onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
         </div>
 
         <div className="progress">
@@ -252,6 +271,7 @@ export default function App() {
           routeOrder={tab === 'route' ? routeOrder : null}
           focusTarget={focusTarget}
           onToggleSelect={toggleSelect}
+          theme={theme}
         />
         <div className="map-legend">
           {CATEGORIES.map((c) => (

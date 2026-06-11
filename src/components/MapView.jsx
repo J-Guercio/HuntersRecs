@@ -45,7 +45,12 @@ export default function MapView({
   routeOrder,
   focusTarget,
   onToggleSelect,
+  theme = 'light',
 }) {
+  const tileUrl =
+    theme === 'dark'
+      ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+      : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
   const visible = useMemo(
     () => places.filter((p) => visibleIds.has(p.id)),
     [places, visibleIds]
@@ -69,8 +74,9 @@ export default function MapView({
   return (
     <MapContainer center={[35.472, -97.523]} zoom={13} scrollWheelZoom zoomControl={false}>
       <TileLayer
+        key={theme}
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        url={tileUrl}
       />
       <FitBounds points={fitPoints} />
       <FlyTo target={focusTarget} />
