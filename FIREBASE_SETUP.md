@@ -29,18 +29,28 @@ Estimated time: ~10 minutes.
 
 > These rules are the real gate: a user can only read/write their own data, and only if their email is on the allowlist.
 
-## 5. Add the allowlist (who's allowed in)
-1. Firestore → **Data** tab → **Start collection** → Collection ID: `allowlist`.
-2. For each allowed person, add a **document** whose **Document ID is their Google email, in lowercase** (e.g. `josephcguercio@gmail.com`).
-   - The document can be empty — only its ID matters. (Tip: add a field like `name: "Joe"` just so it's not blank.)
-3. Repeat **Add document** for every person. To revoke access later, delete their doc.
+## 5. Make yourself an admin (one-time)
+This bootstraps the in-app **Manage access** panel so you can add/remove users without the console.
+1. Firestore → **Data** tab → **Start collection** → Collection ID: `admins`.
+2. Add a **document** whose **Document ID is your own Google email, in lowercase** (e.g. `josephcguercio@gmail.com`).
+   - The document can be empty — only its ID matters. (Tip: add a field like `name: "Joe"` so it's not blank.)
+3. That's it. Admins are always allowed in, and you'll see a **Manage access** button in the app.
 
-## 6. Register a Web app and grab the config
+> To add another admin later, add another doc to `admins`. To revoke an admin, delete their doc.
+
+## 6. Add the people you want to let in
+You have two options:
+- **In-app (recommended):** sign in as an admin → click **Manage access** (bottom-left) → type each person's Google email → **Add**. Remove anyone with the 🗑 button. This is the day-to-day way.
+- **Console:** Firestore → **Start collection** `allowlist` → add a document per person, **Document ID = their lowercase Google email**.
+
+Either way, an allowed person signs in with Google and gets their own private list. (The app auto-creates the `allowlist` collection the first time you add someone in-app.)
+
+## 7. Register a Web app and grab the config
 1. Project **Settings** (gear icon, top-left) → **General** → scroll to **Your apps** → click the **Web** icon (`</>`).
 2. Nickname it (e.g. `web`), **Register app** (skip Hosting).
 3. Copy the `firebaseConfig` values into your env vars (next step).
 
-## 7. Set the environment variables
+## 8. Set the environment variables
 **Local dev** — create a file named `.env.local` in the project root (it's git-ignored) using [`.env.example`](.env.example) as a template:
 
 ```
@@ -56,7 +66,7 @@ Restart `npm run dev` after creating it.
 
 **Vercel** — Project → **Settings → Environment Variables** → add each `VITE_FIREBASE_*` key/value (Production + Preview), then **redeploy**.
 
-## 8. Authorize your domains for sign-in
+## 9. Authorize your domains for sign-in
 The Google popup only works on allowed domains.
 1. Authentication → **Settings → Authorized domains**.
 2. `localhost` is there by default. **Add domain** for your live site, e.g. `hunters-recs.vercel.app` (and any custom domain).
@@ -71,6 +81,7 @@ The Google popup only works on allowed domains.
 
 ## Troubleshooting
 - **Popup closes / "unauthorized domain"** → finish step 8 for that exact domain.
-- **Stuck on "not on the guest list"** → the allowlist doc ID must exactly match your Google email in **lowercase**; re-check step 5.
+- **Stuck on "not on the guest list"** → the `admins`/`allowlist` doc ID must exactly match your Google email in **lowercase** (steps 5–6).
 - **Login wall never appears (still open)** → env vars not loaded; confirm `.env.local` exists (local) or the vars are set + redeployed (Vercel). All three of API key, project ID, and app ID are required.
-- **`Missing or insufficient permissions`** in console → rules not published (step 4) or email not allowlisted (step 5).
+- **`Missing or insufficient permissions`** → rules not published (step 4), or your email isn't in `admins`/`allowlist` (steps 5–6).
+- **No "Manage access" button** → you're signed in but not an admin; add your email to the `admins` collection (step 5).

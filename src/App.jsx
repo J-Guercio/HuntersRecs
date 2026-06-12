@@ -18,7 +18,7 @@ function ConfigWarning() {
 // runs open (localStorage). Once configured, access requires an allowlisted
 // Google sign-in.
 export default function App() {
-  const { status, user, error, signIn, signOut } = useAuth();
+  const { status, user, isAdmin, error, signIn, signOut } = useAuth();
 
   if (status === 'loading') return <AuthLoading />;
   if (status === 'signedOut') return <LoginScreen onSignIn={signIn} error={error} />;
@@ -28,7 +28,7 @@ export default function App() {
   return (
     <>
       {isPartiallyConfigured && <ConfigWarning />}
-      <Planner user={status === 'allowed' ? user : null} db={db} onSignOut={signOut} />
+      <Planner user={status === 'allowed' ? user : null} db={db} isAdmin={isAdmin} onSignOut={signOut} />
     </>
   );
 }

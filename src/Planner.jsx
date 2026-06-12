@@ -6,6 +6,7 @@ import { optimizeRoute } from './lib/geo.js';
 import MapView from './components/MapView.jsx';
 import PlaceList from './components/PlaceList.jsx';
 import RoutePanel from './components/RoutePanel.jsx';
+import AdminPanel from './components/AdminPanel.jsx';
 
 const SEL_KEY = 'okc-hunters-recs:selection:v1';
 
@@ -23,7 +24,8 @@ const loadSel = () => {
 const initialTab = () =>
   new URLSearchParams(window.location.search).get('tab') === 'route' ? 'route' : 'explore';
 
-export default function Planner({ user = null, db = null, onSignOut }) {
+export default function Planner({ user = null, db = null, isAdmin = false, onSignOut }) {
+  const [adminOpen, setAdminOpen] = useState(false);
   // Cloud-backed per-user data when signed in; localStorage otherwise.
   const { tracking, get, update, toggleVisited, togglePriority, resetAll, importState } = useTracking(
     user && db ? { db, uid: user.uid } : undefined
@@ -269,6 +271,11 @@ export default function Planner({ user = null, db = null, onSignOut }) {
               <span className="avatar avatar-fallback">{(user.email || '?')[0].toUpperCase()}</span>
             )}
             <span className="account-email" title={user.email}>{user.email}</span>
+            {isAdmin && (
+              <button className="ghost" onClick={() => setAdminOpen(true)} title="Manage who can sign in">
+                Manage access
+              </button>
+            )}
             <button className="ghost" onClick={onSignOut}>Sign out</button>
           </div>
         )}
@@ -294,6 +301,10 @@ export default function Planner({ user = null, db = null, onSignOut }) {
           ))}
         </div>
       </div>
+
+      {isAdmin && adminOpen && db && user && (
+        <AdminPanel db={db} adminEmail={user.email?.toLowerCase()} onClose={() => setAdminOpen(false)} />
+      )}
     </div>
   );
 }

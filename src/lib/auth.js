@@ -19,12 +19,14 @@ import { auth, db, googleProvider, isFirebaseConfigured } from './firebase.js';
 export function useAuth() {
   const [status, setStatus] = useState(isFirebaseConfigured ? 'loading' : 'local');
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!isFirebaseConfigured) return undefined;
     return onAuthStateChanged(auth, async (u) => {
       setError('');
+      setIsAdmin(false);
       if (!u) {
         setUser(null);
         setStatus('signedOut');
@@ -37,9 +39,15 @@ export function useAuth() {
         return;
       }
       try {
-        // Allowlist doc IDs are lowercase emails (Google emails already are).
-        const snap = await getDoc(doc(db, 'allowlist', u.email.toLowerCase()));
-        setStatus(snap.exists() ? 'allowed' : 'denied');
+        // Doc IDs are lowercase emails (Google emails already are). Admins are
+        // implicitly allowed; otherwise the user must be on the allowlist.
+        const email = u.email.toLowerCase();
+        const [adminSnap, allowSnap] = await Promise.all([
+          getDoc(doc(db, 'admins', email)),
+          getDoc(doc(db, 'allowlist', email)),
+        ]);
+        setIsAdmin(adminSnap.exists());
+        setStatus(adminSnap.exists() || allowSnap.exists() ? 'allowed' : 'denied');
       } catch {
         // A permission error here means not allowlisted (or offline).
         setStatus('denied');
@@ -70,5 +78,5 @@ export function useAuth() {
     return fbSignOut(auth);
   }, []);
 
-  return { status, user, error, signIn, signOut };
+  return { status, user, isAdmin, error, signIn, signOut };
 }

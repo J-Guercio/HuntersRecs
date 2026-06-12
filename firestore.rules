@@ -3,43 +3,56 @@ rules_version = '2';
 // Security rules for OKC Hunters Recs.
 // These are the REAL access gate — the client UI only reflects what these allow.
 //
-//   allowlist/{email}  — one doc per allowed user, doc ID = their Google email
-//                        (lowercase). Managed in the Firebase console only.
+//   admins/{email}     — one doc per ADMIN (doc ID = lowercase Google email).
+//                        Bootstrapped once in the Firebase console. Admins can
+//                        manage the allowlist from inside the app.
+//   allowlist/{email}  — one doc per allowed user (doc ID = lowercase email).
+//                        Created/removed by an admin (in-app) or the console.
 //   users/{uid}        — a single private doc per user holding their tracking
-//                        data. Readable/writable only by that user, and only
-//                        while their email is on the allowlist.
+//                        data. Readable/writable only by that user, while
+//                        their email is allowlisted (admins are always allowed).
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Require an actual Google sign-in with a verified email. Pinning the
-    // provider keeps enforcement aligned with the "Google accounts" intent even
-    // if another auth provider is ever enabled on the project.
+    // Require an actual Google sign-in with a verified email.
     function isGoogleVerified() {
       return request.auth != null
         && request.auth.token.firebase.sign_in_provider == 'google.com'
         && request.auth.token.email_verified == true;
     }
 
-    // True only for a Google-verified user whose email is on the allowlist.
-    function isAllowed() {
+    // Admins are listed in the admins collection (managed in the console).
+    function isAdmin() {
       return isGoogleVerified()
-        && exists(/databases/$(database)/documents/allowlist/$(request.auth.token.email));
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email.lower()));
     }
 
-    // The app only ever writes { tracking: <map>, updatedAt }. Reject anything
-    // else and cap the map size so a user can't bloat their own doc.
+    // Allowed = an admin, or an allowlisted Google-verified user.
+    function isAllowed() {
+      return isGoogleVerified()
+        && (isAdmin()
+            || exists(/databases/$(database)/documents/allowlist/$(request.auth.token.email.lower())));
+    }
+
+    // The app only ever writes { tracking: <map>, updatedAt } to a user doc.
     function validUserDoc() {
       return request.resource.data.keys().hasOnly(['tracking', 'updatedAt'])
         && request.resource.data.tracking is map
         && request.resource.data.tracking.size() <= 300;
     }
 
-    // Allowlist entries are created/removed in the Firebase console (never by
-    // clients). A signed-in user may read ONLY their own entry, so the app can
-    // tell whether they were granted access.
-    match /allowlist/{email} {
-      allow read: if isGoogleVerified() && request.auth.token.email == email;
+    // Admins are bootstrapped in the console only. A signed-in user may read
+    // ONLY their own admin doc (so the app can decide whether to show the panel).
+    match /admins/{email} {
+      allow read: if isGoogleVerified() && request.auth.token.email.lower() == email;
       allow write: if false;
+    }
+
+    // Allowlist: an admin may read the whole list and add/remove entries;
+    // a regular user may read ONLY their own entry (to learn if they're granted).
+    match /allowlist/{email} {
+      allow read: if isAdmin() || (isGoogleVerified() && request.auth.token.email.lower() == email);
+      allow write: if isAdmin();
     }
 
     // Each user's private tracking doc.
