@@ -1,0 +1,56 @@
+rules_version = '2';
+
+// Security rules for OKC Hunters Recs.
+// These are the REAL access gate — the client UI only reflects what these allow.
+//
+//   allowlist/{email}  — one doc per allowed user, doc ID = their Google email
+//                        (lowercase). Managed in the Firebase console only.
+//   users/{uid}        — a single private doc per user holding their tracking
+//                        data. Readable/writable only by that user, and only
+//                        while their email is on the allowlist.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Require an actual Google sign-in with a verified email. Pinning the
+    // provider keeps enforcement aligned with the "Google accounts" intent even
+    // if another auth provider is ever enabled on the project.
+    function isGoogleVerified() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email_verified == true;
+    }
+
+    // True only for a Google-verified user whose email is on the allowlist.
+    function isAllowed() {
+      return isGoogleVerified()
+        && exists(/databases/$(database)/documents/allowlist/$(request.auth.token.email));
+    }
+
+    // The app only ever writes { tracking: <map>, updatedAt }. Reject anything
+    // else and cap the map size so a user can't bloat their own doc.
+    function validUserDoc() {
+      return request.resource.data.keys().hasOnly(['tracking', 'updatedAt'])
+        && request.resource.data.tracking is map
+        && request.resource.data.tracking.size() <= 300;
+    }
+
+    // Allowlist entries are created/removed in the Firebase console (never by
+    // clients). A signed-in user may read ONLY their own entry, so the app can
+    // tell whether they were granted access.
+    match /allowlist/{email} {
+      allow read: if isGoogleVerified() && request.auth.token.email == email;
+      allow write: if false;
+    }
+
+    // Each user's private tracking doc.
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid && isAllowed();
+      allow write: if request.auth != null && request.auth.uid == uid && isAllowed() && validUserDoc();
+    }
+
+    // Anything not matched above is denied by default (Firestore default-deny).
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

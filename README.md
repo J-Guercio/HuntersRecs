@@ -56,7 +56,21 @@ vercel            # follow prompts; accept the Vite defaults
 vercel --prod     # promote to production
 ```
 
-No environment variables are needed.
+No environment variables are needed for the basic (open) app. To turn on the
+**Google login wall + private cloud sync**, set the `VITE_FIREBASE_*` variables —
+see **Access control** below.
+
+## Access control (optional but recommended)
+
+The app can gate access to an allowlist of Google accounts and sync each user's
+tracking data privately to Firestore. Without Firebase configured it runs in
+open "local mode" (no login, data stays in the browser).
+
+To enable it, follow **[FIREBASE_SETUP.md](FIREBASE_SETUP.md)** — create a Firebase
+project, enable Google sign-in, paste [`firestore.rules`](firestore.rules), add
+allowed emails to an `allowlist` collection, and set the `VITE_FIREBASE_*` env
+vars (locally in `.env.local`, and in Vercel's project settings). Once set, the
+login wall and cloud sync activate automatically.
 
 ## The data
 
