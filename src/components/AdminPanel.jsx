@@ -5,8 +5,20 @@ import { collection, onSnapshot, doc, setDoc, deleteDoc, serverTimestamp } from 
 
 const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 
+// Only trust Google profile-photo URLs; never render an arbitrary requester URL
+// (it would beacon the admin's IP when the panel opens).
+const safePhoto = (url) => {
+  try {
+    const u = new URL(url);
+    return u.protocol === 'https:' && u.hostname.endsWith('googleusercontent.com') ? url : '';
+  } catch {
+    return '';
+  }
+};
+
 export default function AdminPanel({ db, adminEmail, onClose }) {
   const [entries, setEntries] = useState(null); // null = loading
+  const [requests, setRequests] = useState([]); // pending access requests
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -25,6 +37,40 @@ export default function AdminPanel({ db, adminEmail, onClose }) {
     );
     return () => unsub();
   }, [db]);
+
+  // Live view of pending access requests.
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, 'accessRequests'),
+      (snap) => {
+        const list = snap.docs.map((d) => ({ email: d.id, ...d.data() }));
+        list.sort((a, b) => (a.requestedAt?.seconds || 0) - (b.requestedAt?.seconds || 0));
+        setRequests(list);
+      },
+      () => {}
+    );
+    return () => unsub();
+  }, [db]);
+
+  const approve = async (req) => {
+    setError('');
+    try {
+      await setDoc(doc(db, 'allowlist', req.email), { addedAt: serverTimestamp(), addedBy: adminEmail });
+      await deleteDoc(doc(db, 'accessRequests', req.email));
+    } catch (e) {
+      setError(e?.code === 'permission-denied' ? 'Only admins can approve.' : e.message);
+    }
+  };
+
+  const deny = async (req) => {
+    if (!confirm(`Deny ${req.email}? They can request again later.`)) return;
+    setError('');
+    try {
+      await deleteDoc(doc(db, 'accessRequests', req.email));
+    } catch (e) {
+      setError(e?.code === 'permission-denied' ? 'Only admins can deny.' : e.message);
+    }
+  };
 
   const existing = useMemo(() => new Set((entries || []).map((e) => e.email)), [entries]);
 
@@ -67,6 +113,29 @@ export default function AdminPanel({ db, adminEmail, onClose }) {
           <h2>Manage access</h2>
           <button className="iconbtn" onClick={onClose} title="Close">✕</button>
         </div>
+        {requests.length > 0 && (
+          <div className="req-block">
+            <h3 className="req-head">Pending requests ({requests.length})</h3>
+            {requests.map((r) => {
+              const photo = safePhoto(r.photo);
+              return (
+              <div className="admin-row req-row" key={r.email}>
+                {photo ? (
+                  <img src={photo} alt="" className="avatar" referrerPolicy="no-referrer" />
+                ) : (
+                  <span className="avatar avatar-fallback">{(r.email || '?')[0].toUpperCase()}</span>
+                )}
+                <span className="admin-mail" title={r.email}>
+                  {r.name ? `${r.name} · ` : ''}{r.email}
+                </span>
+                <button className="primary" style={{ padding: '5px 10px' }} onClick={() => approve(r)}>Approve</button>
+                <button className="ghost" style={{ padding: '5px 9px' }} onClick={() => deny(r)}>Deny</button>
+              </div>
+              );
+            })}
+          </div>
+        )}
+
         <p className="tiny" style={{ margin: '0 0 12px' }}>
           Add the Google email of anyone you want to let in. They sign in with Google and get their own
           private list. Remove an email to revoke access.

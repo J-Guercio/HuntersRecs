@@ -76,8 +76,10 @@ The Google popup only works on allowed domains.
 ## Done — how it behaves
 - **Not signed in** → login wall.
 - **Signed in + on the allowlist** → full app; data syncs to `users/{your-uid}` and follows you across devices.
-- **Signed in but not allowlisted** → "not on the guest list" screen.
+- **Signed in but not allowlisted** → a "not on the guest list" screen with a **Request access** button. Their request shows up in your **Manage access** panel (with a count badge), where you **Approve** (adds them to the allowlist) or **Deny**. The `accessRequests` collection is created automatically — no setup needed.
 - Your existing local progress (from before sign-in) is migrated into the cloud the first time you sign in.
+
+> Heads-up: this feature added an `accessRequests` block to `firestore.rules`, so **re-paste + Publish the rules** (step 4) after pulling this update.
 
 ## Troubleshooting
 - **Popup closes / "unauthorized domain"** → finish step 8 for that exact domain.

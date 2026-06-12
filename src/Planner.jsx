@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { PLACES } from './data/places.js';
 import { CATEGORIES, CATEGORY_COLOR } from './lib/categories.js';
 import { useTracking } from './lib/storage.js';
@@ -26,6 +27,14 @@ const initialTab = () =>
 
 export default function Planner({ user = null, db = null, isAdmin = false, onSignOut }) {
   const [adminOpen, setAdminOpen] = useState(false);
+  const [pendingCount, setPendingCount] = useState(0);
+
+  // Admins: live count of pending access requests for the button badge.
+  useEffect(() => {
+    if (!isAdmin || !db) return undefined;
+    const unsub = onSnapshot(collection(db, 'accessRequests'), (s) => setPendingCount(s.size), () => {});
+    return () => unsub();
+  }, [isAdmin, db]);
   // Cloud-backed per-user data when signed in; localStorage otherwise.
   const { tracking, get, update, toggleVisited, togglePriority, resetAll, importState } = useTracking(
     user && db ? { db, uid: user.uid } : undefined
@@ -272,8 +281,12 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
             )}
             <span className="account-email" title={user.email}>{user.email}</span>
             {isAdmin && (
-              <button className="ghost" onClick={() => setAdminOpen(true)} title="Manage who can sign in">
-                Manage access
+              <button
+                className={pendingCount ? 'ghost has-pending' : 'ghost'}
+                onClick={() => setAdminOpen(true)}
+                title="Manage who can sign in"
+              >
+                Manage access{pendingCount ? ` (${pendingCount})` : ''}
               </button>
             )}
             <button className="ghost" onClick={onSignOut}>Sign out</button>

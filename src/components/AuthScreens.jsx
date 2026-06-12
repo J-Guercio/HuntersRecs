@@ -1,4 +1,6 @@
-// Full-screen auth states: loading, login wall, and access-denied.
+// Full-screen auth states: loading, login wall, and access-denied (+ request access).
+import { useEffect, useState } from 'react';
+import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 function Shell({ children }) {
   return (
@@ -43,14 +45,65 @@ export function LoginScreen({ onSignIn, error }) {
   );
 }
 
-export function AccessDenied({ email, onSignOut }) {
+export function AccessDenied({ user, db, onSignOut }) {
+  const email = (user?.email || '').toLowerCase();
+  const [state, setState] = useState('idle'); // idle | sending | sent | error
+  const [err, setErr] = useState('');
+
+  // If they've already requested, reflect that.
+  useEffect(() => {
+    if (!db || !email) return undefined;
+    let cancelled = false;
+    getDoc(doc(db, 'accessRequests', email))
+      .then((snap) => {
+        if (!cancelled && snap.exists()) setState('sent');
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [db, email]);
+
+  const requestAccess = async () => {
+    setErr('');
+    setState('sending');
+    try {
+      await setDoc(doc(db, 'accessRequests', email), {
+        email,
+        name: user?.displayName || '',
+        photo: user?.photoURL || '',
+        requestedAt: serverTimestamp(),
+      });
+      setState('sent');
+    } catch (e) {
+      setState('error');
+      setErr(e?.message || 'Could not send your request.');
+    }
+  };
+
   return (
     <Shell>
-      <p className="auth-sub">
-        You're signed in as <b>{email || 'your account'}</b>, but that account isn't on the guest list yet.
-      </p>
-      <p className="auth-fine">Ask the owner to add your email to the allowlist, then sign in again.</p>
-      <button className="ghost" onClick={onSignOut} style={{ marginTop: 6 }}>
+      {state === 'sent' ? (
+        <>
+          <p className="auth-sub">
+            ✅ Request sent for <b>{email}</b>. You'll get in once the owner approves you.
+          </p>
+          <button className="primary" onClick={() => window.location.reload()} style={{ width: '100%' }}>
+            Check again
+          </button>
+        </>
+      ) : (
+        <>
+          <p className="auth-sub">
+            You're signed in as <b>{email || 'your account'}</b>, but you're not on the guest list yet.
+          </p>
+          <button className="primary" onClick={requestAccess} disabled={state === 'sending' || !db} style={{ width: '100%' }}>
+            {state === 'sending' ? 'Sending…' : 'Request access'}
+          </button>
+          {err && <p className="auth-error">{err}</p>}
+        </>
+      )}
+      <button className="ghost" onClick={onSignOut} style={{ marginTop: 10 }}>
         Use a different account
       </button>
     </Shell>

@@ -22,7 +22,7 @@ export default function App() {
 
   if (status === 'loading') return <AuthLoading />;
   if (status === 'signedOut') return <LoginScreen onSignIn={signIn} error={error} />;
-  if (status === 'denied') return <AccessDenied email={user?.email} onSignOut={signOut} />;
+  if (status === 'denied') return <AccessDenied user={user} db={db} onSignOut={signOut} />;
 
   // 'allowed' → cloud-backed planner; 'local' → open planner (no Firebase).
   return (

@@ -262,6 +262,17 @@ a { color: var(--accent); }
   background: var(--accent); border-radius: 99px; padding: 2px 7px; font-weight: 700; flex: none;
 }
 
+.req-block {
+  margin-bottom: 14px; padding: 10px; border-radius: 10px;
+  background: color-mix(in srgb, var(--gold) 14%, var(--panel));
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line));
+}
+.req-head { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); }
+.req-row { background: var(--panel); }
+.has-pending {
+  border-color: var(--gold) !important; color: var(--gold) !important; font-weight: 600;
+}
+
 /* ---------- config warning ---------- */
 .config-warning {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1200;
