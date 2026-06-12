@@ -12,11 +12,13 @@ Estimated time: ~10 minutes.
 ## 1. Create the Firebase project
 1. Go to <https://console.firebase.google.com> → **Add project**. Name it (e.g. `hunters-recs`). Google Analytics is optional (you can skip it).
 
-## 2. Turn on Google sign-in
+## 2. Turn on sign-in methods (Google + Email/Password)
 1. In the project, left nav → **Build → Authentication → Get started**.
-2. **Sign-in method** tab → **Add new provider → Google → Enable**.
-3. Pick a support email, **Save**.
-4. Leave **only Google** enabled (don't add Email/Password, Anonymous, etc.). The security rules already require a Google sign-in, but keeping other providers off removes any doubt.
+2. **Sign-in method** tab → **Add new provider → Google → Enable** → pick a support email → **Save**.
+3. **Add new provider → Email/Password → Enable** (leave "Email link (passwordless)" **off**) → **Save**.
+4. Don't enable other providers (Anonymous, etc.). The rules accept **only Google or Email/Password**, and require a **verified** email either way.
+
+> Email verification is mandatory: a new email/password user must click the verification link before they can get in — so no one can claim an email they don't actually own. (Optional: Authentication → **Settings → User actions** → keep **Email enumeration protection** on.)
 
 ## 3. Create the Firestore database
 1. Left nav → **Build → Firestore Database → Create database**.
@@ -74,7 +76,8 @@ The Google popup only works on allowed domains.
 ---
 
 ## Done — how it behaves
-- **Not signed in** → login wall.
+- **Not signed in** → login wall (Google **or** email/password — sign in or create an account).
+- **New email/password account** → a "verify your email" screen until they click the link you emailed them (you can resend it there).
 - **Signed in + on the allowlist** → full app; data syncs to `users/{your-uid}` and follows you across devices.
 - **Signed in but not allowlisted** → a "not on the guest list" screen with a **Request access** button. Their request shows up in your **Manage access** panel (with a count badge), where you **Approve** (adds them to the allowlist) or **Deny**. The `accessRequests` collection is created automatically — no setup needed.
 - Your existing local progress (from before sign-in) is migrated into the cloud the first time you sign in.

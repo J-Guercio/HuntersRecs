@@ -31,16 +31,113 @@ const GoogleMark = () => (
   </svg>
 );
 
-export function LoginScreen({ onSignIn, error }) {
+export function LoginScreen({ onGoogle, onSignIn, onSignUp, onReset, error }) {
+  const [mode, setMode] = useState('signin'); // signin | signup
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [notice, setNotice] = useState('');
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setNotice('');
+    setBusy(true);
+    if (mode === 'signin') await onSignIn(email, password);
+    else await onSignUp(email, password);
+    setBusy(false);
+  };
+
+  const forgot = async () => {
+    setNotice('');
+    if (!email) {
+      setNotice('Enter your email above first, then tap "Forgot password?".');
+      return;
+    }
+    const ok = await onReset(email);
+    if (ok) setNotice('Password reset email sent — check your inbox.');
+  };
+
   return (
     <Shell>
-      <p className="auth-sub">A private guide to Hunter's OKC picks. Sign in to continue — access is limited to invited people.</p>
-      <button className="google-btn" onClick={onSignIn}>
-        <GoogleMark />
-        Sign in with Google
-      </button>
+      <p className="auth-sub">A private guide to Hunter's OKC picks. Access is limited to invited people.</p>
+
+      <div className="seg">
+        <button type="button" className={mode === 'signin' ? 'on' : ''} onClick={() => { setMode('signin'); setNotice(''); }}>
+          Sign in
+        </button>
+        <button type="button" className={mode === 'signup' ? 'on' : ''} onClick={() => { setMode('signup'); setNotice(''); }}>
+          Create account
+        </button>
+      </div>
+
+      <form onSubmit={submit} className="auth-form">
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required />
+        <input
+          type="password"
+          placeholder={mode === 'signup' ? 'Password (6+ characters)' : 'Password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+          minLength={6}
+          required
+        />
+        <button className="primary" type="submit" disabled={busy} style={{ width: '100%' }}>
+          {busy ? 'Please wait…' : mode === 'signin' ? 'Sign in' : 'Create account'}
+        </button>
+      </form>
+
+      {mode === 'signin' && (
+        <button type="button" className="linkbtn" onClick={forgot}>
+          Forgot password?
+        </button>
+      )}
+      {notice && <p className="auth-note">{notice}</p>}
       {error && <p className="auth-error">{error}</p>}
-      <p className="auth-fine">Your visited list, ratings, and notes stay private to your account.</p>
+
+      <div className="auth-divider"><span>or</span></div>
+
+      <button className="google-btn" onClick={onGoogle}>
+        <GoogleMark />
+        Continue with Google
+      </button>
+
+      <p className="auth-fine">
+        {mode === 'signup'
+          ? "We'll email you a link to verify your address before you can finish."
+          : 'Your visited list, ratings, and notes stay private to your account.'}
+      </p>
+    </Shell>
+  );
+}
+
+export function VerifyEmail({ user, onResend, onRecheck, onSignOut }) {
+  const [sent, setSent] = useState(false);
+  const [checking, setChecking] = useState(false);
+
+  const resend = async () => {
+    await onResend();
+    setSent(true);
+  };
+  const check = async () => {
+    setChecking(true);
+    await onRecheck();
+    setChecking(false);
+  };
+
+  return (
+    <Shell>
+      <p className="auth-sub">
+        Almost there — verify your email. We sent a link to <b>{user?.email}</b>. Click it, then come back here.
+      </p>
+      <button className="primary" onClick={check} disabled={checking} style={{ width: '100%' }}>
+        {checking ? 'Checking…' : "I've verified — continue"}
+      </button>
+      <button className="ghost" onClick={resend} style={{ marginTop: 8 }}>
+        {sent ? 'Verification email sent ✓' : 'Resend verification email'}
+      </button>
+      <button className="ghost" onClick={onSignOut} style={{ marginTop: 8 }}>
+        Use a different account
+      </button>
     </Shell>
   );
 }

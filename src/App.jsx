@@ -1,7 +1,7 @@
 import { useAuth } from './lib/auth.js';
 import { db, isPartiallyConfigured } from './lib/firebase.js';
 import Planner from './Planner.jsx';
-import { AuthLoading, LoginScreen, AccessDenied } from './components/AuthScreens.jsx';
+import { AuthLoading, LoginScreen, VerifyEmail, AccessDenied } from './components/AuthScreens.jsx';
 
 // Loud warning if Firebase is half-configured — otherwise the login wall would
 // silently be OFF and the owner might think the app is gated when it isn't.
@@ -18,10 +18,25 @@ function ConfigWarning() {
 // runs open (localStorage). Once configured, access requires an allowlisted
 // Google sign-in.
 export default function App() {
-  const { status, user, isAdmin, error, signIn, signOut } = useAuth();
+  const {
+    status,
+    user,
+    isAdmin,
+    error,
+    signInGoogle,
+    signInEmail,
+    signUpEmail,
+    resetPassword,
+    resendVerification,
+    recheck,
+    signOut,
+  } = useAuth();
 
   if (status === 'loading') return <AuthLoading />;
-  if (status === 'signedOut') return <LoginScreen onSignIn={signIn} error={error} />;
+  if (status === 'signedOut')
+    return <LoginScreen onGoogle={signInGoogle} onSignIn={signInEmail} onSignUp={signUpEmail} onReset={resetPassword} error={error} />;
+  if (status === 'unverified')
+    return <VerifyEmail user={user} onResend={resendVerification} onRecheck={recheck} onSignOut={signOut} />;
   if (status === 'denied') return <AccessDenied user={user} db={db} onSignOut={signOut} />;
 
   // 'allowed' → cloud-backed planner; 'local' → open planner (no Firebase).
