@@ -37,6 +37,18 @@ function FlyTo({ target }) {
   return null;
 }
 
+// On mobile the map can be `display:none` while the list is showing. Leaflet
+// can't measure a hidden container, so it renders gray tiles when revealed —
+// recompute its size whenever the visible panel changes.
+function InvalidateOnReveal({ signal }) {
+  const map = useMap();
+  useEffect(() => {
+    const id = setTimeout(() => map.invalidateSize(), 60);
+    return () => clearTimeout(id);
+  }, [signal, map]);
+  return null;
+}
+
 export default function MapView({
   places,
   visibleIds,
@@ -46,6 +58,7 @@ export default function MapView({
   focusTarget,
   onToggleSelect,
   theme = 'light',
+  revealSignal,
 }) {
   const tileUrl =
     theme === 'dark'
@@ -80,6 +93,7 @@ export default function MapView({
       />
       <FitBounds points={fitPoints} />
       <FlyTo target={focusTarget} />
+      <InvalidateOnReveal signal={revealSignal} />
 
       {routeLine.length > 1 && (
         <Polyline positions={routeLine} pathOptions={{ color: '#38bdf8', weight: 3, opacity: 0.9, dashArray: '1 8', lineCap: 'round' }} />

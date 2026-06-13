@@ -45,6 +45,9 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
   const [hideVisited, setHideVisited] = useState(false);
   const [onlyPriority, setOnlyPriority] = useState(false);
   const [tab, setTab] = useState(initialTab);
+  // Mobile only: which full-screen panel is showing. Desktop ignores this
+  // (both panels are always visible side-by-side).
+  const [mobileView, setMobileView] = useState('list');
   const [selectedIds, setSelectedIds] = useState(() => {
     const valid = new Set(PLACES.map((p) => p.id));
     return new Set([...loadSel()].filter((id) => valid.has(id)));
@@ -120,7 +123,11 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
     setTab('route');
   };
 
-  const focusPlace = (p) => setFocusTarget({ lat: p.lat, lng: p.lng, _t: Date.now() });
+  const focusPlace = (p) => {
+    setFocusTarget({ lat: p.lat, lng: p.lng, _t: Date.now() });
+    // On mobile the map is hidden behind the list — surface it so "show on map" works.
+    setMobileView('map');
+  };
 
   const exportData = () => {
     const blob = new Blob([JSON.stringify({ tracking, selection: [...selectedIds] }, null, 2)], {
@@ -153,7 +160,7 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
   const pct = Math.round((visitedCount / PLACES.length) * 100);
 
   return (
-    <div className="app">
+    <div className={`app mobile-${mobileView}`}>
       <aside className="sidebar">
         <div className="brand">
           <div>
@@ -304,6 +311,7 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
           focusTarget={focusTarget}
           onToggleSelect={toggleSelect}
           theme={theme}
+          revealSignal={mobileView}
         />
         <div className="map-legend">
           {CATEGORIES.map((c) => (
@@ -313,6 +321,26 @@ export default function Planner({ user = null, db = null, isAdmin = false, onSig
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Mobile-only: switch between the full-screen list and map. */}
+      <div className="mobile-toggle" role="tablist" aria-label="View">
+        <button
+          role="tab"
+          aria-selected={mobileView === 'list'}
+          className={mobileView === 'list' ? 'active' : ''}
+          onClick={() => setMobileView('list')}
+        >
+          ☰ List
+        </button>
+        <button
+          role="tab"
+          aria-selected={mobileView === 'map'}
+          className={mobileView === 'map' ? 'active' : ''}
+          onClick={() => setMobileView('map')}
+        >
+          🗺️ Map
+        </button>
       </div>
 
       {isAdmin && adminOpen && db && user && (

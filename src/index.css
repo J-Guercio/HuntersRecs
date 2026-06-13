@@ -231,10 +231,47 @@ textarea { resize: vertical; min-height: 52px; }
 .tiny { font-size: 11px; color: var(--muted); }
 a { color: var(--accent); }
 
+/* ---------- mobile view toggle (hidden on desktop) ---------- */
+.mobile-toggle { display: none; }
+
 @media (max-width: 860px) {
-  .app { grid-template-columns: 1fr; grid-template-rows: 52vh 48vh; }
-  .sidebar { order: 2; border-right: none; border-top: 1px solid var(--line); }
-  .map-wrap { order: 1; }
+  /* One full-screen panel at a time; the toggle bar swaps between them. */
+  .app {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    height: 100vh;
+    height: 100dvh;
+  }
+  .sidebar, .map-wrap { flex: 1; min-height: 0; order: 1; }
+  .sidebar { border-right: none; }
+  .app.mobile-list .map-wrap { display: none; }
+  .app.mobile-map .sidebar { display: none; }
+
+  .mobile-toggle {
+    display: flex;
+    order: 2;
+    flex: none;
+    gap: 6px;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+  }
+  .mobile-toggle button {
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .mobile-toggle button.active {
+    background: var(--accent);
+    color: #06121f;
+    border-color: var(--accent);
+  }
+
+  /* The legend overlaps the toggle/list on small screens — drop it on mobile. */
+  .map-legend { display: none; }
 }
 
 /* ---------- admin modal ---------- */
