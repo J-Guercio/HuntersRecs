@@ -105,6 +105,7 @@ textarea { resize: vertical; min-height: 52px; }
   min-height: 0;
 }
 .map-wrap { position: relative; min-width: 0; min-height: 0; height: 100%; }
+:root[data-theme='dark'] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9); }
 .map-wrap > .leaflet-container { position: absolute; inset: 0; height: auto; }
 
 .brand {

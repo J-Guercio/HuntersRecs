@@ -60,10 +60,8 @@ export default function MapView({
   theme = 'light',
   revealSignal,
 }) {
-  const tileUrl =
-    theme === 'dark'
-      ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-      : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  // OpenStreetMap standard tiles (no API key). Dark mode inverts them via CSS.
+  const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
   const visible = useMemo(
     () => places.filter((p) => visibleIds.has(p.id)),
     [places, visibleIds]
@@ -88,7 +86,7 @@ export default function MapView({
     <MapContainer center={[35.472, -97.523]} zoom={13} scrollWheelZoom zoomControl={false}>
       <TileLayer
         key={theme}
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url={tileUrl}
       />
       <FitBounds points={fitPoints} />
